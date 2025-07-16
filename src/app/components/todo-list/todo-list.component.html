@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="todo-section">
+    <h1 class="section-title">All Todos</h1>
+
+    <div class="todo-grid">
+      <div class="flip-card" *ngFor="let todo of todos">
+        <div class="flip-card-inner" [class.completed]="todo.completed">
+          <!-- Front of card -->
+          <div class="flip-card-front">
+            <div class="todo-text">
+              <h3>{{ todo.title }}</h3>
+              <p>{{ todo.description }}</p>
+            </div>
+          </div>
+
+          <!-- Back of card -->
+          <div class="flip-card-back">
+            <p>{{ todo.completed ? 'Already Completed' : 'What do you want to do?' }}</p>
+            <div class="button-group">
+              <button class="btn complete" (click)="toggleCompleted(todo)">
+                {{ todo.completed ? 'Undo' : 'Mark Completed' }}
+              </button>
+              <button class="btn delete" (click)="onDelete(todo.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2 class="section-title">Add new Todo</h2>
+    <app-todo-form></app-todo-form>
+  </div>
+</div>
