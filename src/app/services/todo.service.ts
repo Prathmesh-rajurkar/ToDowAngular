@@ -13,6 +13,7 @@ export class TodoService {
   constructor() {
     const userTodos = this.loadTodosForUser();
     this.todosSubject.next(userTodos);
+    console.log(this.todosSubject);
   }
 
   getTodo(): Observable<Todo[]> {

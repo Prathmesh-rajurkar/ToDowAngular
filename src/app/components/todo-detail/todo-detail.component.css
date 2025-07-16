@@ -1,0 +1,86 @@
+.todo-detail-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transform-style: preserve-3d;
+}
+
+.flip-card-inner.no-hover {
+  transform: none !important;
+}
+
+.flip-card-front {
+  background-color: #121212;
+  color: #f5f5f5;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.todo-text h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.todo-text p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Button group styling */
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn.complete {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn.complete:hover {
+  background-color: #43a047;
+}
+
+.btn.delete {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn.delete:hover {
+  background-color: #c62828;
+}
+
+.not-found {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #f44336;
+}

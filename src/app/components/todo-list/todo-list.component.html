@@ -3,7 +3,12 @@
     <h1 class="section-title">All Todos</h1>
 
     <div class="todo-grid">
-      <div class="flip-card" *ngFor="let todo of todos">
+      <a
+        class="flip-card"
+        *ngFor="let todo of todos"
+        [routerLink]="['/todo', todo.id]"
+        style="text-decoration: none; color: inherit;"
+      >
         <div class="flip-card-inner" [class.completed]="todo.completed">
           <!-- Front of card -->
           <div class="flip-card-front">
@@ -17,14 +22,22 @@
           <div class="flip-card-back">
             <p>{{ todo.completed ? 'Already Completed' : 'What do you want to do?' }}</p>
             <div class="button-group">
-              <button class="btn complete" (click)="toggleCompleted(todo)">
+              <button
+                class="btn complete"
+                (click)="toggleCompleted(todo); $event.stopPropagation(); $event.preventDefault()"
+              >
                 {{ todo.completed ? 'Undo' : 'Mark Completed' }}
               </button>
-              <button class="btn delete" (click)="onDelete(todo.id)">Delete</button>
+              <button
+                class="btn delete"
+                (click)="onDelete(todo.id); $event.stopPropagation(); $event.preventDefault()"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 

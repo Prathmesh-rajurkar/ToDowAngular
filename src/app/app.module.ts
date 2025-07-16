@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoService } from './services/todo.service';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RegisterComponent } from './auth/register/register.component';
     TodoFormComponent,
     TodoListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TodoDetailComponent
   ],
   imports: [
     BrowserModule,

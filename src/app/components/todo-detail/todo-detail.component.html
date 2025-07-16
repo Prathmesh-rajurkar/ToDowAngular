@@ -1,0 +1,34 @@
+<div class="todo-detail-container">
+  <div *ngIf="todo; else notFound" class="flip-card">
+    <div class="flip-card-inner no-hover">
+      <div class="flip-card-front">
+        <div class="todo-text">
+          <h2>{{ todo.title }}</h2>
+          <p>{{ todo.description }}</p>
+          <p>Status: {{ todo.completed ? '✅ Completed' : '⌛ Incomplete' }}</p>
+
+          <div class="button-group">
+            <button
+              class="btn complete"
+              (click)="toggleCompleted(todo)"
+            >
+              {{ todo.completed ? 'Undo' : 'Mark as Done' }}
+            </button>
+            <button
+              class="btn delete"
+              (click)="onDelete(todo.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #notFound>
+    <div class="not-found">
+      <p>❌ Todo not found.</p>
+    </div>
+  </ng-template>
+</div>
