@@ -11,6 +11,7 @@ import { TodoService } from './services/todo.service';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TodoDetailComponent } from './components/todo-detail/todo-detail.compon
     TodoListComponent,
     LoginComponent,
     RegisterComponent,
-    TodoDetailComponent
+    TodoDetailComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

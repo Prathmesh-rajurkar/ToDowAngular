@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'], 
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -15,13 +15,21 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
+      role: ['user']  // default role
     });
   }
 
   onSubmit() {
     if (this.registerForm.invalid) return;
 
-    const success = this.auth.register(this.registerForm.value);
+    const formValue = this.registerForm.value;
+
+    // Automatically assign admin role if specific email is used
+    if (formValue.email === 'admin@example.com') {
+      formValue.role = 'admin';
+    }
+
+    const success = this.auth.register(formValue);
     if (success) {
       alert('Registered! Now login.');
       this.router.navigate(['/login']);

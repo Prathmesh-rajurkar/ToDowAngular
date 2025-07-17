@@ -13,7 +13,6 @@ export class TodoService {
   constructor() {
     const userTodos = this.loadTodosForUser();
     this.todosSubject.next(userTodos);
-    console.log(this.todosSubject);
   }
 
   getTodo(): Observable<Todo[]> {
@@ -43,7 +42,7 @@ export class TodoService {
     this.todosSubject.next(todos);
   }
 
-  // 📥 Load only for current user
+  // 🧍 For current user
   private loadTodosForUser(): Todo[] {
     const currentUser = localStorage.getItem(this.currentUserKey);
     if (!currentUser) return [];
@@ -53,7 +52,6 @@ export class TodoService {
     return allTodos[currentUser] || [];
   }
 
-  // 💾 Save only for current user
   private saveTodosForUser(todos: Todo[]): void {
     const currentUser = localStorage.getItem(this.currentUserKey);
     if (!currentUser) return;
@@ -61,6 +59,34 @@ export class TodoService {
     const data = localStorage.getItem(this.storageKey);
     const allTodos = data ? JSON.parse(data) : {};
     allTodos[currentUser] = todos;
+    localStorage.setItem(this.storageKey, JSON.stringify(allTodos));
+  }
+
+  // 👨‍💼 Admin access
+
+  getAllTodos(): { [email: string]: Todo[] } {
+    const data = localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : {};
+  }
+
+  getTodosByUser(email: string): Todo[] {
+    const allTodos = this.getAllTodos();
+    return allTodos[email] || [];
+  }
+
+  deleteTodoByUser(email: string, id: number): void {
+    const allTodos = this.getAllTodos();
+    const userTodos = allTodos[email] || [];
+    allTodos[email] = userTodos.filter((todo) => todo.id !== id);
+    localStorage.setItem(this.storageKey, JSON.stringify(allTodos));
+  }
+
+  toggleCompletedByUser(email: string, id: number): void {
+    const allTodos = this.getAllTodos();
+    const userTodos = allTodos[email] || [];
+    allTodos[email] = userTodos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
     localStorage.setItem(this.storageKey, JSON.stringify(allTodos));
   }
 }

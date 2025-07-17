@@ -1,0 +1,39 @@
+<div class="admin-container">
+  <h2 class="section-title">Admin Dashboard</h2>
+
+  <div class="user-section" *ngFor="let user of users">
+    <h3 class="user-email">{{ user.email }}</h3>
+
+    <div class="todo-grid">
+      <div class="flip-card" *ngFor="let todo of allTodos[user.email]">
+        <div class="flip-card-inner" [class.completed]="todo.completed">
+          <!-- Front of card -->
+          <div class="flip-card-front">
+            <div class="todo-text">
+              <h4>{{ todo.title }}</h4>
+              <p>{{ todo.description }}</p>
+              <p>Status: {{ todo.completed ? '✅ Completed' : '❌ Incomplete' }}</p>
+            </div>
+          </div>
+
+          <!-- Back of card -->
+          <div class="flip-card-back">
+            <p>{{ todo.completed ? 'Undo completion?' : 'Mark as done?' }}</p>
+            <div class="button-group">
+              <button class="btn complete" (click)="toggleTodo(user.email, todo.id)">
+                {{ todo.completed ? 'Undo' : 'Mark Done' }}
+              </button>
+              <button class="btn delete" (click)="deleteTodo(user.email, todo.id)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!allTodos[user.email]?.length" class="no-todos">
+      <p>No todos found for this user.</p>
+    </div>
+  </div>
+</div>
